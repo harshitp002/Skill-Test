@@ -2,14 +2,24 @@
 
 This app is simple Skill Test Application that allows users to check their scores and update them. I have also incorporated interactive animations using Recharts.js to visualize the score data more effectively.
 
+## Live App
 
-## Tech Stack
-- Nextjs 15
-- Tailwind CSS
-- Shadcn UI
-- Context API
-- Rechart-js
-- react-icons
+You can view the live application here:  
+[Skill Test Live App](http://skill-test-culb.vercel.app/)
+
+## Features
+- Check and update your score.
+- Visualize score data with interactive charts using Recharts.js.
+- Built with Next.js, Tailwind CSS, and Shadcn UI.
+
+
+## Technologies Used
+- **Next.js 15**
+- **Tailwind CSS**
+- **Shadcn UI**
+- **Recharts.js**
+- **React Icons**
+- **Context API** (can be replaced with Redux Toolkit for better state management)
 
 
 
