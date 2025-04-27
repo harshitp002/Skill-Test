@@ -9,9 +9,9 @@ import Image from "next/image";
 
 export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { updateScores } = useScore();
-  const [rank, setRank] = useState(1);
-  const [percentile, setPercentile] = useState(30);
-  const [correct, setCorrect] = useState(10);
+  const [rank, setRank] = useState<number | null>(null);
+  const [percentile, setPercentile] = useState<number | null>(null);
+  const [correct, setCorrect] = useState<number | null>(null);
 
   const [errors, setErrors] = useState({
     rank: "",
@@ -21,9 +21,9 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
 
   const validateFields = () => {
     const newErrors = {
-      rank: rank < 1 || rank > 15 ? "Rank should be between 1 and 15." : "",
-      percentile: percentile < 0 || percentile > 100 ? "Percentile should be between 0 and 100." : "",
-      correct: correct < 1 || correct > 15 ? "Correct score should be between 1 and 15." : "",
+      rank: rank === null || rank < 1 || rank > 15 ? "Rank should be between 1 and 15." : "",
+      percentile: percentile === null || percentile < 0 || percentile > 100 ? "Percentile should be between 0 and 100." : "",
+      correct: correct === null || correct < 1 || correct > 15 ? "Correct score should be between 1 and 15." : "",
     };
     setErrors(newErrors);
     return !newErrors.rank && !newErrors.percentile && !newErrors.correct;
@@ -31,20 +31,21 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
 
   const handleSave = () => {
     if (validateFields()) {
-      updateScores(rank, percentile, correct);
+      updateScores(rank!, percentile!, correct!);
       onClose();
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="w-[90%] sm:max-w-md rounded-lg p-4 " >
+      <DialogContent className="w-[90%] sm:max-w-md rounded-lg p-4">
         <DialogHeader className="flex flex-row items-center justify-between">
           <DialogTitle className="text-xl font-bold">Update scores</DialogTitle>
-          <Image src="/images/HTML5_logo.png" alt="HTML5" width={30} height={30} /> {/* Update path if needed */}
+          <Image src="/images/HTML5_logo.png" alt="HTML5" width={30} height={30} />
         </DialogHeader>
 
         <div className="space-y-6 mt-4">
+
           {/* Rank */}
           <div className="flex items-start gap-4">
             <div className="bg-blue-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mt-1">
@@ -61,7 +62,7 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
                   onChange={(e) => {
                     const value = e.target.value;
                     if (value === "") {
-                      setRank(null); // empty
+                      setRank(null);
                       setErrors(prev => ({ ...prev, rank: "Rank is required." }));
                     } else {
                       const num = Number(value);
@@ -75,17 +76,16 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
                     }
                   }}
                   placeholder="Rank"
-                  className={`border rounded w-28 min-w-0 p-2 h-10 focus:outline-none focus:w-36 ${errors.rank ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500"
-                    }`}
+                  className={`border rounded w-28 min-w-0 p-2 h-10 focus:outline-none focus:w-36 ${
+                    errors.rank ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500"
+                  }`}
                 />
-                {/* Error message */}
                 {errors.rank && (
                   <p className="absolute text-red-500 text-xs mt-1">{errors.rank}</p>
                 )}
               </div>
             </div>
           </div>
-
 
           {/* Percentile */}
           <div className="flex items-start gap-4">
@@ -117,10 +117,10 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
                     }
                   }}
                   placeholder="Percentile"
-                  className={`border rounded w-28 min-w-0 p-2 h-10 focus:outline-none focus:w-36 ${errors.percentile ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500"
-                    }`}
+                  className={`border rounded w-28 min-w-0 p-2 h-10 focus:outline-none focus:w-36 ${
+                    errors.percentile ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500"
+                  }`}
                 />
-                {/* Error message */}
                 {errors.percentile && (
                   <p className="absolute text-red-500 text-xs mt-1">{errors.percentile}</p>
                 )}
@@ -128,8 +128,7 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
             </div>
           </div>
 
-
-          {/* Current Score */}
+          {/* Correct Score */}
           <div className="flex items-start gap-4">
             <div className="bg-blue-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mt-1">
               3
@@ -159,10 +158,10 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
                     }
                   }}
                   placeholder="Current Score"
-                  className={`border rounded w-28 min-w-0 p-2 h-10 focus:outline-none focus:w-36 ${errors.correct ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500"
-                    }`}
+                  className={`border rounded w-28 min-w-0 p-2 h-10 focus:outline-none focus:w-36 ${
+                    errors.correct ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500"
+                  }`}
                 />
-                {/* Error message */}
                 {errors.correct && (
                   <p className="absolute text-red-500 text-xs mt-1">{errors.correct}</p>
                 )}
@@ -192,4 +191,3 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
     </Dialog>
   );
 }
-

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { UpdateScoreModal } from "@/components/UpdateScoreModal";
+import Image from "next/image";
 
 export function SkillTestCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +14,7 @@ export function SkillTestCard() {
         <CardContent className="p-2 sm:p-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <div className="flex items-start sm:items-center gap-3 sm:gap-4 w-full sm:flex-1">
-              <img 
+              <Image
                 src="/images/HTML5_logo.png" 
                 alt="HTML Logo" 
                 className="w-10 sm:w-12 h-10 sm:h-12 object-contain flex-shrink-0"

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import  Image from "next/image";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,7 +10,7 @@ export function Header() {
     <div className="w-full flex justify-between items-center px-4 sm:px-5 md:px-6 lg:px-8 py-3 sm:py-3 md:py-4 bg-white border-b relative">
       {/* Left: Logo + Title */}
       <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-        <img
+        <Image
           src="/images/logo.png"
           alt="Logo"
           className="w-6 h-6 sm:w-8 sm:h-7 md:w-10 md:h-8"
@@ -23,7 +24,7 @@ export function Header() {
       <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
         {/* Profile Info*/}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 border rounded-md p-1 sm:p-1.5 md:p-2">
-          <img
+          <Image
             src="/images/profile.jpeg"
             alt="User Profile"
             className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full object-cover"
