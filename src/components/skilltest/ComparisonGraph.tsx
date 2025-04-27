@@ -7,11 +7,12 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  TooltipProps,
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
 import { PiChartLineUpLight } from "react-icons/pi"; 
-import { cn } from "@/lib/utils"; 
+// import { cn } from "@/lib/utils"; 
 
 const data = [
   { percentile: 0, count: 1 },
@@ -27,7 +28,7 @@ const data = [
   { percentile: 100, count: 2 },
 ];
 
-const CustomTooltip = ({ active, payload }: any) => {
+const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white p-3 rounded-md shadow-md border text-xs text-gray-700">

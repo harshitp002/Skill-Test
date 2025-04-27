@@ -3,6 +3,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 
+type SyllabusItem = {
+  label: string;
+  progress: number;
+  color: string;
+};
+
 export function SyllabusAnalysis() {
   const syllabus = [
     { label: "HTML Tools, Forms, History", progress: 80, color: "bg-blue-500" },
@@ -25,7 +31,7 @@ export function SyllabusAnalysis() {
   );
 }
 
-function ProgressBar({ item }: { item: typeof syllabus[number] }) {
+function ProgressBar({ item }: { item: SyllabusItem }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {

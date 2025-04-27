@@ -36,14 +36,6 @@ export function UpdateScoreModal({ open, onClose }: { open: boolean; onClose: ()
     }
   };
 
-  const handleInputChange = (setter: (val: number) => void, min: number, max: number) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = Number(e.target.value);
-      if (!isNaN(value) && value >= min && value <= max) {
-        setter(value);
-      }
-    };
-
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="w-[90%] sm:max-w-md rounded-lg p-4 " >
